@@ -11,59 +11,76 @@ Piece* possible_moves(Piece p) { // given the board is empty
     int o;
     int q;
 
-    Piece moves[27]; // 27 is the largest possible number of moves a piece could make
+    static Piece moves[27]; // 27 is the largest possible number of moves a piece could make
     Piece temp = { p.isWhite, p.type, p.x, p.y };
 
     switch (p.type) {
 
         case pawn:
-            if (p.isWhite && p.y == 2) {
-                temp.y = p.y + 2;
+            if (p.isWhite && p.y == 6) {
+                temp.y -= 2;
                 moves[1] = temp;
+                temp.y = p.y;
+            } if (p.isWhite) {
+                temp.y--;
+                moves[0] = temp;
             }
-            temp.y = p.y + 1;
-            moves[0] = temp;
+
+            if (!(p.isWhite) && p.y == 1) {
+                temp.y += 2;
+                moves[1] = temp;
+                temp.y = p.y;
+            } if (!(p.isWhite)) {
+                temp.y++;
+                moves[0] = temp;
+            }
             break;
 
         case bishop:
             for (i = 0; i < 7; i++){
-                temp.x = p.x + 1;
-                temp.y = p.y + 1;
+                temp.x++;
+                temp.y++;
 
-                if (temp.x >= 8 || temp.y >= 8)
+                if (temp.x > 7 || temp.y > 7)
                     break;
 
                 moves[i] = temp;
             }
-            for (j = i; j < i + 7; j++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x + 1;
-                temp.y = p.y - 1;
 
-                if (temp.x >= 8 || temp.y <= 1)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (j = i; j < i + 7; j++){
+                temp.x++;
+                temp.y--;
+
+                if (temp.x > 7 || temp.y < 0)
                     break;
 
                 moves[j] = temp;
             }
-            for (k = j; k < j + 7; k++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x - 1;
-                temp.y = p.y + 1;
 
-                if (temp.x <= 1 || temp.y >= 8)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (k = j; k < j + 7; k++){
+                temp.x--;
+                temp.y--;
+
+                if (temp.x < 0 || temp.y < 0)
                     break;
 
                 moves[k] = temp;
             }
-            for (l = k; l < k + 7; l++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x - 1;
-                temp.y = p.y - 1;
 
-                if (temp.x <= 1 || temp.y <= 1)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (l = k; l < k + 7; l++){
+                temp.x--;
+                temp.y++;
+
+                if (temp.x < 0 || temp.y > 7)
                     break;
 
                 moves[l] = temp;
@@ -72,36 +89,42 @@ Piece* possible_moves(Piece p) { // given the board is empty
 
         case rook:
             for (i = 0; i < 7; i++){
-                temp.x = p.x + 1;
+                temp.x++;
 
-                if (temp.x >= 8)
+                if (temp.x > 7)
                     break;
 
                 moves[i] = temp;
             }
-            for (j = i; j < i + 7; j++){
-                temp.x = p.x;
-                temp.y = p.y - 1;
 
-                if (temp.y <= 1 )
+            temp.x = p.x;
+
+            for (j = i; j < i + 7; j++){
+                temp.y--;
+
+                if (temp.y < 0)
                     break;
 
                 moves[j] = temp;
             }
-            for (k = j; k < j + 7; k++){
-                temp.y = p.y;
-                temp.x = p.x - 1;
 
-                if (temp.x <= 1)
+            temp.y = p.y;
+
+            for (k = j; k < j + 7; k++){
+                temp.x--;
+
+                if (temp.x < 0)
                     break;
 
                 moves[k] = temp;
             }
-            for (l = k; l < k + 7; l++){
-                temp.x = p.x;
-                temp.y = p.y + 1;
 
-                if (temp.y >= 8)
+            temp.x = p.x;
+
+            for (l = k; l < k + 7; l++){
+                temp.y++;
+
+                if (temp.y > 7)
                     break;
 
                 moves[l] = temp;
@@ -110,87 +133,222 @@ Piece* possible_moves(Piece p) { // given the board is empty
 
         case queen:
             for (i = 0; i < 7; i++){
-                temp.x = p.x + 1;
-                temp.y = p.y + 1;
+                temp.x++;
+                temp.y++;
 
-                if (temp.x >= 8 || temp.y >= 8)
+                if (temp.x > 7 || temp.y > 7)
                     break;
 
                 moves[i] = temp;
             }
-            for (j = i; j < i + 7; j++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x + 1;
-                temp.y = p.y - 1;
 
-                if (temp.x >= 8 || temp.y <= 1)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (j = i; j < i + 7; j++){
+                temp.x++;
+                temp.y--;
+
+                if (temp.x > 7 || temp.y < 0)
                     break;
 
                 moves[j] = temp;
             }
-            for (k = j; k < j + 7; k++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x - 1;
-                temp.y = p.y + 1;
 
-                if (temp.x <= 1 || temp.y >= 8)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (k = j; k < j + 7; k++){
+                temp.x--;
+                temp.y--;
+
+                if (temp.x < 0 || temp.y < 0)
                     break;
 
                 moves[k] = temp;
             }
-            for (l = k; l < k + 7; l++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x - 1;
-                temp.y = p.y - 1;
 
-                if (temp.x <= 1 || temp.y <= 1)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (l = k; l < k + 7; l++){
+                temp.x--;
+                temp.y++;
+
+                if (temp.x < 0 || temp.y > 7)
                     break;
 
                 moves[l] = temp;
             }
-            for (m = l; m < l + 7; m++){
-                temp.x = p.x;
-                temp.y = p.y;
-                temp.x = p.x + 1;
 
-                if (temp.x >= 8)
+            temp.x = p.x;
+            temp.y = p.y;
+
+            for (m = l; m < l + 7; m++){
+                temp.x++;
+
+                if (temp.x > 7)
                     break;
 
                 moves[m] = temp;
             }
-            for (n = m; n < m + 7; n++){
-                temp.x = p.x;
-                temp.y = p.y - 1;
 
-                if (temp.y <= 1 )
+            temp.x = p.x;
+
+            for (n = m; n < m + 7; n++){
+                temp.y--;
+
+                if (temp.y < 0)
                     break;
 
                 moves[n] = temp;
             }
-            for (o = n; o < n + 7; o++){
-                temp.y = p.y;
-                temp.x = p.x - 1;
 
-                if (temp.x <= 1)
+            temp.y = p.y;
+
+            for (o = n; o < n + 7; o++){
+                temp.x--;
+
+                if (temp.x < 0)
                     break;
 
                 moves[o] = temp;
             }
-            for (q = o; q < o + 7; q++){
-                temp.x = p.x;
-                temp.y = p.y + 1;
 
-                if (temp.y >= 8)
+            temp.x = p.x;
+
+            for (q = o; q < o + 7; q++){
+                temp.y++;
+
+                if (temp.y > 7)
                     break;
 
                 moves[q] = temp;
             }
             break;
 
+        case knight:
+            temp.x += 2;
+            temp.y++;
+
+            if (temp.x <= 7 && temp.y <= 7)
+                moves[0] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x += 2;
+            temp.y--;
+
+            if (temp.x <= 7 && temp.y >= 0)
+                moves[1] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x++;
+            temp.y -= 2;
+
+            if (temp.x <= 7 && temp.y >= 0)
+                moves[2] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x--;
+            temp.y -= 2;
+
+            if (temp.x >= 0 && temp.y >= 0)
+                moves[3] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x -= 2;
+            temp.y++;
+
+            if (temp.x >= 0 && temp.y <= 7)
+                moves[4] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x -= 2;
+            temp.y--;
+
+            if (temp.x >= 0 && temp.y >= 0)
+                moves[5] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x--;
+            temp.y += 2;
+
+            if (temp.x >= 0 && temp.y <= 7)
+                moves[6] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+            temp.x++;
+            temp.y += 2;
+
+            if (temp.x <= 7 && temp.y <= 7)
+                moves[7] = temp;
+
+            break;
+
+        case king:
+            temp.x++;
+            if (temp.x <= 7)
+                moves[0] = temp;
+
+            temp.x = p.x;
+
+            temp.x++;
+            temp.y--;
+            if (temp.x <= 7 && temp.y >= 0)
+                moves[1] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+
+            temp.y--;
+            if (temp.y >= 0)
+                moves[2] = temp;
+
+            temp.y = p.y;
+
+            temp.x--;
+            temp.y--;
+            if (temp.x >= 0 && temp.y >= 0)
+                moves[3] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+
+            temp.x--;
+            if (temp.x >= 0)
+                moves[4] = temp;
+
+            temp.x = p.x;
+
+            temp.x--;
+            temp.y++;
+            if (temp.x >= 0 && temp.y <= 7)
+                moves[5] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+
+            temp.y++;
+            if (temp.y <= 7)
+                moves[6] = temp;
+
+            temp.x = p.x;
+            temp.y = p.y;
+
+            temp.x++;
+            temp.y++;
+            if (temp.x <= 7 && temp.y <= 7)
+                moves[7] = temp;
+
+            break;
     }
 
     return moves;
-};
+}

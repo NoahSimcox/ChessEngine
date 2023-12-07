@@ -6,4 +6,6 @@ set(CMAKE_C_STANDARD 11)
 add_executable(untitled main.c
         chessPieces.c
         chessPieces.h
+        chessBoard.c
+        chessBoard.h
 )
