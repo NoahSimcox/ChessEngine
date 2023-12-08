@@ -3,7 +3,11 @@
 
 Piece* new_board(){
 
-    static Piece currPieces[32];
+    static Piece currPieces[64];
+
+    for (int i = 0; i < 32; i++) {
+        Piece square = {true, empty, };
+    }
 
     Piece wp1 = {true, pawn, 0, 6};
     Piece wp2 = {true, pawn, 1, 6};
@@ -83,3 +87,5 @@ Piece* new_board(){
     
     return currPieces;
 }
+
+

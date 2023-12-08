@@ -8,4 +8,6 @@ add_executable(untitled main.c
         chessPieces.h
         chessBoard.c
         chessBoard.h
+        pieceLogic.c
+        pieceLogic.h
 )

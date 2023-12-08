@@ -3,7 +3,10 @@
 
 #include <stdbool.h>
 
-typedef enum { pawn, bishop, knight, rook, queen, king, empty } piece_type;
+#define ROW 8
+#define COL 7
+
+typedef enum { empty, pawn, bishop, knight, rook, queen, king } piece_type;
 
 typedef struct {
     bool isWhite;
@@ -12,6 +15,6 @@ typedef struct {
     int y;
 } Piece;
 
-Piece* possible_moves(Piece);
+Piece (*possible_moves(Piece))[COL];
 
 #endif //UNTITLED_CHESSPIECES_H

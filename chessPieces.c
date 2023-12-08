@@ -1,6 +1,9 @@
 #include "chessPieces.h"
 
-Piece* possible_moves(Piece p) { // given the board is empty
+#define ROW 8
+#define COL 7
+
+Piece (*possible_moves(Piece p))[COL] { // given the board is empty
 
     int i;
     int j;
@@ -11,7 +14,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
     int o;
     int q;
 
-    static Piece moves[27]; // 27 is the largest possible number of moves a piece could make
+    static Piece moves[ROW][COL];
     Piece temp = { p.isWhite, p.type, p.x, p.y };
 
     switch (p.type) {
@@ -19,20 +22,20 @@ Piece* possible_moves(Piece p) { // given the board is empty
         case pawn:
             if (p.isWhite && p.y == 6) {
                 temp.y -= 2;
-                moves[1] = temp;
+                moves[0][1] = temp;
                 temp.y = p.y;
             } if (p.isWhite) {
                 temp.y--;
-                moves[0] = temp;
+                moves[0][0] = temp;
             }
 
             if (!(p.isWhite) && p.y == 1) {
                 temp.y += 2;
-                moves[1] = temp;
+                moves[0][1] = temp;
                 temp.y = p.y;
             } if (!(p.isWhite)) {
                 temp.y++;
-                moves[0] = temp;
+                moves[0][0] = temp;
             }
             break;
 
@@ -44,46 +47,46 @@ Piece* possible_moves(Piece p) { // given the board is empty
                 if (temp.x > 7 || temp.y > 7)
                     break;
 
-                moves[i] = temp;
+                moves[0][i] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (j = i; j < i + 7; j++){
+            for (j = 0; j < 7; j++){
                 temp.x++;
                 temp.y--;
 
                 if (temp.x > 7 || temp.y < 0)
                     break;
 
-                moves[j] = temp;
+                moves[1][j] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (k = j; k < j + 7; k++){
+            for (k = 0; k < 7; k++){
                 temp.x--;
                 temp.y--;
 
                 if (temp.x < 0 || temp.y < 0)
                     break;
 
-                moves[k] = temp;
+                moves[2][k] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (l = k; l < k + 7; l++){
+            for (l = 0; l < 7; l++){
                 temp.x--;
                 temp.y++;
 
                 if (temp.x < 0 || temp.y > 7)
                     break;
 
-                moves[l] = temp;
+                moves[3][l] = temp;
             }
             break;
 
@@ -94,40 +97,40 @@ Piece* possible_moves(Piece p) { // given the board is empty
                 if (temp.x > 7)
                     break;
 
-                moves[i] = temp;
+                moves[0][i] = temp;
             }
 
             temp.x = p.x;
 
-            for (j = i; j < i + 7; j++){
+            for (j = 0; j < 7; j++){
                 temp.y--;
 
                 if (temp.y < 0)
                     break;
 
-                moves[j] = temp;
+                moves[1][j] = temp;
             }
 
             temp.y = p.y;
 
-            for (k = j; k < j + 7; k++){
+            for (k = 0; k < 7; k++){
                 temp.x--;
 
                 if (temp.x < 0)
                     break;
 
-                moves[k] = temp;
+                moves[2][k] = temp;
             }
 
             temp.x = p.x;
 
-            for (l = k; l < k + 7; l++){
+            for (l = 0; l < 7; l++){
                 temp.y++;
 
                 if (temp.y > 7)
                     break;
 
-                moves[l] = temp;
+                moves[3][l] = temp;
             }
             break;
 
@@ -139,91 +142,91 @@ Piece* possible_moves(Piece p) { // given the board is empty
                 if (temp.x > 7 || temp.y > 7)
                     break;
 
-                moves[i] = temp;
+                moves[0][i] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (j = i; j < i + 7; j++){
+            for (j = 0; j < 7; j++){
                 temp.x++;
                 temp.y--;
 
                 if (temp.x > 7 || temp.y < 0)
                     break;
 
-                moves[j] = temp;
+                moves[1][j] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (k = j; k < j + 7; k++){
+            for (k = 0; k < 7; k++){
                 temp.x--;
                 temp.y--;
 
                 if (temp.x < 0 || temp.y < 0)
                     break;
 
-                moves[k] = temp;
+                moves[2][k] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (l = k; l < k + 7; l++){
+            for (l = 0; l < 7; l++){
                 temp.x--;
                 temp.y++;
 
                 if (temp.x < 0 || temp.y > 7)
                     break;
 
-                moves[l] = temp;
+                moves[3][l] = temp;
             }
 
             temp.x = p.x;
             temp.y = p.y;
 
-            for (m = l; m < l + 7; m++){
+            for (m = 0; m < 7; m++){
                 temp.x++;
 
                 if (temp.x > 7)
                     break;
 
-                moves[m] = temp;
+                moves[4][m] = temp;
             }
 
             temp.x = p.x;
 
-            for (n = m; n < m + 7; n++){
+            for (n = 0; n < 7; n++){
                 temp.y--;
 
                 if (temp.y < 0)
                     break;
 
-                moves[n] = temp;
+                moves[5][n] = temp;
             }
 
             temp.y = p.y;
 
-            for (o = n; o < n + 7; o++){
+            for (o = 0; o < 7; o++){
                 temp.x--;
 
                 if (temp.x < 0)
                     break;
 
-                moves[o] = temp;
+                moves[6][o] = temp;
             }
 
             temp.x = p.x;
 
-            for (q = o; q < o + 7; q++){
+            for (q = 0; q < 7; q++){
                 temp.y++;
 
                 if (temp.y > 7)
                     break;
 
-                moves[q] = temp;
+                moves[7][q] = temp;
             }
             break;
 
@@ -232,7 +235,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y++;
 
             if (temp.x <= 7 && temp.y <= 7)
-                moves[0] = temp;
+                moves[0][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -240,7 +243,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y--;
 
             if (temp.x <= 7 && temp.y >= 0)
-                moves[1] = temp;
+                moves[1][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -248,7 +251,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y -= 2;
 
             if (temp.x <= 7 && temp.y >= 0)
-                moves[2] = temp;
+                moves[2][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -256,7 +259,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y -= 2;
 
             if (temp.x >= 0 && temp.y >= 0)
-                moves[3] = temp;
+                moves[3][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -264,7 +267,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y++;
 
             if (temp.x >= 0 && temp.y <= 7)
-                moves[4] = temp;
+                moves[4][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -272,7 +275,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y--;
 
             if (temp.x >= 0 && temp.y >= 0)
-                moves[5] = temp;
+                moves[5][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -280,7 +283,7 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y += 2;
 
             if (temp.x >= 0 && temp.y <= 7)
-                moves[6] = temp;
+                moves[6][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -288,56 +291,56 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.y += 2;
 
             if (temp.x <= 7 && temp.y <= 7)
-                moves[7] = temp;
+                moves[7][0] = temp;
 
             break;
 
         case king:
             temp.x++;
             if (temp.x <= 7)
-                moves[0] = temp;
+                moves[0][0] = temp;
 
             temp.x = p.x;
 
             temp.x++;
             temp.y--;
             if (temp.x <= 7 && temp.y >= 0)
-                moves[1] = temp;
+                moves[1][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
 
             temp.y--;
             if (temp.y >= 0)
-                moves[2] = temp;
+                moves[2][0] = temp;
 
             temp.y = p.y;
 
             temp.x--;
             temp.y--;
             if (temp.x >= 0 && temp.y >= 0)
-                moves[3] = temp;
+                moves[3][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
 
             temp.x--;
             if (temp.x >= 0)
-                moves[4] = temp;
+                moves[4][0] = temp;
 
             temp.x = p.x;
 
             temp.x--;
             temp.y++;
             if (temp.x >= 0 && temp.y <= 7)
-                moves[5] = temp;
+                moves[5][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
 
             temp.y++;
             if (temp.y <= 7)
-                moves[6] = temp;
+                moves[6][0] = temp;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -345,8 +348,11 @@ Piece* possible_moves(Piece p) { // given the board is empty
             temp.x++;
             temp.y++;
             if (temp.x <= 7 && temp.y <= 7)
-                moves[7] = temp;
+                moves[7][0] = temp;
 
+            break;
+
+        case empty:
             break;
     }
 
