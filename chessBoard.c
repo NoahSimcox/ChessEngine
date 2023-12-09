@@ -1,12 +1,20 @@
 #include "chessBoard.h"
 #include "chessPieces.h"
 
-Piece* new_board(){
+Piece* new_board(Piece currPieces[32]){
 
-    static Piece currPieces[64];
-
+    static Piece currBoard[64];
+    int x = 0;
+    int y = 0;
     for (int i = 0; i < 32; i++) {
-        Piece square = {true, empty, };
+        if (i == 7 || i == 15 || i == 23) {
+            x = 0;
+            y++;
+        }
+        else
+            x++;
+        Piece square = {true, empty, y, x};
+        currBoard[i + 32] = square;
     }
 
     Piece wp1 = {true, pawn, 0, 6};
@@ -84,6 +92,38 @@ Piece* new_board(){
     currPieces[29] = bb2;
     currPieces[30] = bq;
     currPieces[31] = bk;
+    currBoard[0] = wp1;
+    currBoard[1] = wp2;
+    currBoard[2] = wp3;
+    currBoard[3] = wp4;
+    currBoard[4] = wp5;
+    currBoard[5] = wp6;
+    currBoard[6] = wp7;
+    currBoard[7] = wp8;
+    currBoard[8] = wr1;
+    currBoard[9] = wr2;
+    currBoard[10] = wn1;
+    currBoard[11] = wn2;
+    currBoard[12] = wb1;
+    currBoard[13] = wb2;
+    currBoard[14] = wq;
+    currBoard[15] = wk;
+    currBoard[16] = bp1;
+    currBoard[17] = bp2;
+    currBoard[18] = bp3;
+    currBoard[19] = bp4;
+    currBoard[20] = bp5;
+    currBoard[21] = bp6;
+    currBoard[22] = bp7;
+    currBoard[23] = bp8;
+    currBoard[24] = br1;
+    currBoard[25] = br2;
+    currBoard[26] = bn1;
+    currBoard[27] = bn2;
+    currBoard[28] = bb1;
+    currBoard[29] = bb2;
+    currBoard[30] = bq;
+    currBoard[31] = bk;
     
     return currPieces;
 }

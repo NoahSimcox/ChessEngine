@@ -10,4 +10,6 @@ add_executable(untitled main.c
         chessBoard.h
         pieceLogic.c
         pieceLogic.h
+        arrayClean.c
+        arrayClean.h
 )

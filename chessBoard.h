@@ -4,6 +4,6 @@
 
 void update_board();
 
-Piece* new_board();
+Piece* new_board(Piece currPieces[32]);
 
 #endif //UNTITLED_CHESSBOARD_H
