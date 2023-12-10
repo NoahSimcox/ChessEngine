@@ -3,6 +3,6 @@
 
 #include "chessPieces.h"
 
-Piece* possible_move_prune(Piece*);
+Piece* possible_move_prune(Piece(*possibleMoves)[COL]);
 
 #endif //UNTITLED_PIECELOGIC_H
