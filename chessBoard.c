@@ -128,4 +128,19 @@ Piece* new_board(Piece currPieces[32]){
     return currPieces;
 }
 
+Piece* update_board(Piece move, Piece currBoard[64]) {
+
+    for (int i = 0; i < 64; i++){
+
+        if (move.x == currBoard[i].x && move.y == currBoard[i].y){
+
+            currBoard[i] = move;
+
+            return currBoard;
+        }
+    }
+
+    return currBoard;
+}
+
 

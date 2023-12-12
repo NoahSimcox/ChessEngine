@@ -6,7 +6,7 @@ int main() {
 
 //    Piece* newBoard = new_board();
 
-    Piece piece = {true, queen, 0, 4 };
+    Piece piece = {true, knight, 4, 4 };
     Piece (*ptr)[COL] = possible_moves(piece);
 
     for (int i = 0; i < 8; i++) {

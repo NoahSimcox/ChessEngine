@@ -28,49 +28,38 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL]){
 
             switch (possibleMoves[0][0].type) {
                 case pawn:
-                case king:
-                case knight:
                     // nothing is done here
                     break;
                 default:
-                    if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].type == currPieces[j].type){
+                    if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].isWhite == currPieces[j].isWhite){
                         row++;
                         col = 0;
+                        i -= 1; // do this as to not increase the index of newPossibleMoves
                         goto exitLoop;
-                    } else if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].type != currPieces[j].type){
+                    } else if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].isWhite != currPieces[j].isWhite){
                         newPossibleMoves[i] = possibleMoves[row][col];
                         row++;
                         col = 0;
+                        goto exitLoop;
+                    } else if (possibleMoves[0][0].type != knight && possibleMoves[0][0].type != king){
+                        newPossibleMoves[i] = possibleMoves[row][col];
+                        col++;
                         goto exitLoop;
                     } else {
                         newPossibleMoves[i] = possibleMoves[row][col];
-                        col++;
-                        goto exitLoop;
-                    }
-            }
-
-            switch (possibleMoves[0][0].type) {
-                case pawn:
-                case queen:
-                case rook:
-                case bishop:
-                    // nothing is done here
-                    break;
-                default:
-                    if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].type == currPieces[j].type){
                         row++;
-                        col = 0;
-                        goto exitLoop;
-                    } else if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].type != currPieces[j].type){
-                        newPossibleMoves[i] = possibleMoves[row][col];
-                        col++;
                         goto exitLoop;
                     }
-                    break;
             }
-
-
-
+            // Finish hard coding the pawn
+            if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x + 1) && currPieces[j].y == possibleMoves[0][0].y){
+                Piece temp = {possibleMoves[0][0].isWhite, pawn, possibleMoves[0][0].x + 1, possibleMoves[0][0].y};
+                newPossibleMoves[i] = temp;
+            }
+            if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x - 1) && currPieces[j].y == possibleMoves[0][0].y){
+                Piece temp = {possibleMoves[0][0].isWhite, pawn, possibleMoves[0][0].x - 1, possibleMoves[0][0].y};
+                newPossibleMoves[i + 1] = temp;
+            }
         }
 
 

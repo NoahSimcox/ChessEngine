@@ -2,8 +2,8 @@
 #define UNTITLED_CHESSBOARD_H
 #include "chessPieces.h"
 
-void update_board();
-
 Piece* new_board(Piece currPieces[32]);
+
+Piece* update_board(Piece move, Piece currBoard[64]);
 
 #endif //UNTITLED_CHESSBOARD_H
