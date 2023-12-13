@@ -3,6 +3,6 @@
 
 #include "chessPieces.h"
 
-Piece* arrayClean(Piece arr[27]);
+Piece* arrayClean(Piece arr[27], int* count);
 
 #endif //UNTITLED_ARRAYCLEAN_H
