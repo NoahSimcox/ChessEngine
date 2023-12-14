@@ -17,7 +17,7 @@ Piece* new_board(Piece currPieces[32]){
         currBoard[i + 32] = square;
     }
 
-    Piece wp1 = {true, pawn, 0, 6};
+    Piece wp1 = {true, pawn, 4, 3};
     Piece wp2 = {true, pawn, 1, 6};
     Piece wp3 = {true, pawn, 2, 6};
     Piece wp4 = {true, pawn, 3, 6};
@@ -39,7 +39,7 @@ Piece* new_board(Piece currPieces[32]){
     Piece wk = {true, king, 4, 7};
 
 
-    Piece bp1 = {false, pawn, 0, 1};
+    Piece bp1 = {false, pawn, 5, 3};
     Piece bp2 = {false, pawn, 1, 1};
     Piece bp3 = {false, pawn, 2, 1};
     Piece bp4 = {false, pawn, 3, 1};
@@ -128,19 +128,20 @@ Piece* new_board(Piece currPieces[32]){
     return currPieces;
 }
 
-Piece* update_board(Piece move, Piece currBoard[64]) {
-
-    for (int i = 0; i < 64; i++){
-
-        if (move.x == currBoard[i].x && move.y == currBoard[i].y){
-
-            currBoard[i] = move;
-
-            return currBoard;
-        }
-    }
-
-    return currBoard;
-}
+//Piece* update_board(Piece move[2], Piece currBoard[64]) {
+//
+//    for (int i = 0; i < 64; i++){
+//
+//        if (move[1].x == currBoard[i].x && move[1].y == currBoard[i].y){
+//
+//            currBoard[i] = move[1];
+//
+//
+//            return currBoard;
+//        }
+//    }
+//
+//    return currBoard;
+//}
 
 

@@ -2,8 +2,9 @@
 #include "chessPieces.h"
 #include "chessBoard.h"
 #include "stdio.h"
+#include "stdbool.h"
 
-Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32]){
+Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1]){
 
 
     static Piece newPossibleMoves[27];
@@ -48,7 +49,7 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32]){
             }
 
 
-            // pawn taking being hard coded
+            // pawn stuff being hard coded
             if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x + 1) && currPieces[j].y == possibleMoves[0][0].y){
                 Piece temp = {possibleMoves[0][0].isWhite, pawn, possibleMoves[0][0].x + 1, possibleMoves[0][0].y};
                 newPossibleMoves[2] = temp;
@@ -56,6 +57,10 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32]){
             if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x - 1) && currPieces[j].y == possibleMoves[0][0].y){
                 Piece temp = {possibleMoves[0][0].isWhite, pawn, possibleMoves[0][0].x - 1, possibleMoves[0][0].y};
                 newPossibleMoves[3] = temp;
+            }
+            if (possibleMoves[0][0].type == pawn && canEnPassant){
+                printf("testing");
+                newPossibleMoves[4] = newPawnMove[0];
             }
 
         }
@@ -72,4 +77,32 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32]){
     }
 
     return newPossibleMoves;
+}
+
+
+bool canEnPassant(Piece currMove[2], Piece currPieces[32], Piece newMove[1]){
+    if (currMove[0].y - currMove[1].y == 2 || currMove[0].y - currMove[1].y == -2){
+        for (int i = 0; i < 32; i++){
+
+            int type = currPieces[i].type;
+            bool isWhite = currPieces[i].isWhite;
+            int pieceX = currPieces[i].x;
+            int pieceY = currPieces[i].y;
+            int moveX = currMove[1].x;
+            int moveY = currMove[1].y;
+
+            if (isWhite != currMove[1].isWhite && type == pawn && (pieceX == moveX + 1 || pieceX == moveX - 1) && (pieceY == moveY)){
+                if (currPieces[i].isWhite) {
+                    Piece temp = {currPieces[i].isWhite, pawn, currMove[1].x, currMove[1].y - 1};
+                    newMove[0] = temp;
+                } else {
+                    Piece temp = {currPieces[i].isWhite, pawn, currMove[1].x, currMove[1].y + 1};
+                    newMove[0] = temp;
+                }
+
+                return true;
+            }
+        }
+    }
+    return false;
 }

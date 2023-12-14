@@ -6,8 +6,10 @@ Piece* arrayClean(Piece arr[27], int* count){
 
     int size = 0;
 
-    while (arr[size].type != empty){
-        size++;
+    for (int j = 0; j < 27; j++){
+        if (arr[j].type != empty){
+            size++;
+        }
     }
 
     Piece* newArr = malloc(size * sizeof(Piece));
@@ -15,8 +17,13 @@ Piece* arrayClean(Piece arr[27], int* count){
         // Handle memory allocation failure
         return NULL;
     }
-    for (int i = 0; i < size; i++){
-        newArr[i] = arr[i];
+
+    int increment = 0;
+    for (int i = 0; i < 27; i++){
+        if (arr[i].type != empty) {
+            newArr[increment] = arr[i];
+            increment++;
+        }
     }
 
     *count = size;
