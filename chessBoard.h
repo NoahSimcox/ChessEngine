@@ -4,6 +4,6 @@
 
 Piece* new_board(Piece currPieces[32]);
 
-Piece* update_board(Piece move, Piece currBoard[64]);
+Piece* update_board(Piece move[2], Piece currBoard[64], Piece currPieces[32]);
 
 #endif //UNTITLED_CHESSBOARD_H

@@ -17,7 +17,7 @@ Piece* new_board(Piece currPieces[32]){
         currBoard[i + 32] = square;
     }
 
-    Piece wp1 = {true, pawn, 4, 3};
+    Piece wp1 = {true, pawn, 0, 6};
     Piece wp2 = {true, pawn, 1, 6};
     Piece wp3 = {true, pawn, 2, 6};
     Piece wp4 = {true, pawn, 3, 6};
@@ -35,13 +35,13 @@ Piece* new_board(Piece currPieces[32]){
     Piece wb1 = {true, bishop, 2, 7};
     Piece wb2 = {true, bishop, 5, 7};
 
-    Piece wq = {true, queen, 3, 7};
+    Piece wq = {true, queen, 5, 4};
     Piece wk = {true, king, 4, 7};
 
 
-    Piece bp1 = {false, pawn, 5, 3};
+    Piece bp1 = {false, pawn, 0, 1};
     Piece bp2 = {false, pawn, 1, 1};
-    Piece bp3 = {false, pawn, 2, 1};
+    Piece bp3 = {false, pawn, 2, 4};
     Piece bp4 = {false, pawn, 3, 1};
     Piece bp5 = {false, pawn, 4, 1};
     Piece bp6 = {false, pawn, 5, 1};
@@ -125,23 +125,33 @@ Piece* new_board(Piece currPieces[32]){
     currBoard[30] = bq;
     currBoard[31] = bk;
     
-    return currPieces;
+    return currBoard;
 }
 
-//Piece* update_board(Piece move[2], Piece currBoard[64]) {
-//
-//    for (int i = 0; i < 64; i++){
-//
-//        if (move[1].x == currBoard[i].x && move[1].y == currBoard[i].y){
-//
-//            currBoard[i] = move[1];
-//
-//
-//            return currBoard;
-//        }
-//    }
-//
-//    return currBoard;
-//}
+Piece* update_board(Piece move[2], Piece currBoard[64], Piece currPieces[32]) {
+
+    for (int i = 0; i < 64; i++){
+
+        if (i < 32 && currPieces[i].x == move[1].x && currPieces[i].y == move[1].y){
+            currPieces[i].type = empty;
+            currBoard[i].type = empty;
+        }
+
+        if (i < 32 && currPieces[i].x == move[0].x && currPieces[i].y == move[0].y) {
+            currPieces[i].x = move[1].x;
+            currPieces[i].y = move[1].y;
+            currBoard[i].x = move[1].x;
+            currBoard[i].y = move[1].y;
+        }
+
+
+        if (i >= 32 && move[1].x == currBoard[i].x && move[1].y == currBoard[i].y){
+            currBoard[i] = move[1];
+            return currBoard;
+        }
+    }
+
+    return currBoard;
+}
 
 

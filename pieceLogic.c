@@ -29,36 +29,33 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bo
                 break;
             }
 
-            switch (possibleMoves[0][0].type) {
-                default:
-                    if ((currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].isWhite == currPieces[j].isWhite) || (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].type == pawn)){
-                        if (row == 7)
-                            return newPossibleMoves;
-                        row++;
-                        col = 0;
-                        i -= 1; // do this as to not increase the index of newPossibleMoves
-                        goto exitLoop;
-                    } else if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].isWhite != currPieces[j].isWhite && possibleMoves[0][0].type != pawn){
-                        newPossibleMoves[i] = possibleMoves[row][col];
-                        if (row == 7)
-                            return newPossibleMoves;
-                        row++;
-                        col = 0;
-                        goto exitLoop;
-                    }
+            if ((currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].isWhite == currPieces[j].isWhite) || (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].type == pawn) && currPieces[j].type != empty){
+                if (row == 7)
+                    return newPossibleMoves;
+                row++;
+                col = 0;
+                i -= 1; // do this as to not increase the index of newPossibleMoves
+                goto exitLoop;
+            } else if (currPieces[j].x == possibleMoves[row][col].x && currPieces[j].y == possibleMoves[row][col].y && possibleMoves[0][0].isWhite != currPieces[j].isWhite && possibleMoves[0][0].type != pawn && currPieces[j].type != empty){
+                newPossibleMoves[i] = possibleMoves[row][col];
+                if (row == 7)
+                    return newPossibleMoves;
+                row++;
+                col = 0;
+                goto exitLoop;
             }
 
 
             // pawn stuff being hard coded
-            if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x + 1) && currPieces[j].y == possibleMoves[0][0].y){
+            if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x + 1) && currPieces[j].y == possibleMoves[0][0].y && currPieces[j].type != empty){
                 Piece temp = {possibleMoves[0][0].isWhite, pawn, possibleMoves[0][0].x + 1, possibleMoves[0][0].y};
                 newPossibleMoves[2] = temp;
             }
-            if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x - 1) && currPieces[j].y == possibleMoves[0][0].y){
+            if (possibleMoves[0][0].type == pawn && currPieces[j].x == (possibleMoves[0][0].x - 1) && currPieces[j].y == possibleMoves[0][0].y && currPieces[j].type != empty){
                 Piece temp = {possibleMoves[0][0].isWhite, pawn, possibleMoves[0][0].x - 1, possibleMoves[0][0].y};
                 newPossibleMoves[3] = temp;
             }
-            if (possibleMoves[0][0].type == pawn && canEnPassant){
+            if (possibleMoves[0][0].type == pawn && canEnPassant && currPieces[j].type != empty){
                 printf("testing");
                 newPossibleMoves[4] = newPawnMove[0];
             }
@@ -67,9 +64,19 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bo
 
         if (possibleMoves[0][0].type != knight && possibleMoves[0][0].type != king) {
             newPossibleMoves[i] = possibleMoves[row][col];
-            col++;
+
+            if (col == 6) {
+                row++;
+                col = 0;
+            } else
+                col++;
+
         } else {
             newPossibleMoves[i] = possibleMoves[row][col];
+
+            if (row == 7)
+                return newPossibleMoves;
+
             row++;
         }
 
