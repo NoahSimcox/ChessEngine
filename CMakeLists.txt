@@ -12,4 +12,6 @@ add_executable(untitled main.c
         pieceLogic.h
         arrayClean.c
         arrayClean.h
+        evaluate.c
+        evaluate.h
 )

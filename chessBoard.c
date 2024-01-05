@@ -17,48 +17,48 @@ Piece* new_board(Piece currPieces[32]){
         currBoard[i + 32] = square;
     }
 
-    Piece wp1 = {true, pawn, 0, 6};
-    Piece wp2 = {true, pawn, 1, 6};
-    Piece wp3 = {true, pawn, 2, 6};
-    Piece wp4 = {true, pawn, 3, 6};
-    Piece wp5 = {true, pawn, 4, 6};
-    Piece wp6 = {true, pawn, 5, 6};
-    Piece wp7 = {true, pawn, 6, 6};
-    Piece wp8 = {true, pawn, 7, 6};
+    Piece wp1 = {true, pawn, 0, 6, 1};
+    Piece wp2 = {true, pawn, 1, 6, 1};
+    Piece wp3 = {true, pawn, 2, 6, 1};
+    Piece wp4 = {true, pawn, 3, 6, 1};
+    Piece wp5 = {true, pawn, 4, 6, 1};
+    Piece wp6 = {true, pawn, 5, 6, 1};
+    Piece wp7 = {true, pawn, 6, 6, 1};
+    Piece wp8 = {true, pawn, 7, 6, 1};
 
-    Piece wr1 = {true, rook, 0, 7};
-    Piece wr2 = {true, rook, 7, 7};
+    Piece wr1 = {true, rook, 0, 7, 5};
+    Piece wr2 = {true, rook, 7, 7, 5};
 
-    Piece wn1 = {true, knight, 1, 7};
-    Piece wn2 = {true, knight, 6, 7};
+    Piece wn1 = {true, knight, 1, 7, 3};
+    Piece wn2 = {true, knight, 6, 7, 3};
 
-    Piece wb1 = {true, bishop, 2, 7};
-    Piece wb2 = {true, bishop, 5, 7};
+    Piece wb1 = {true, bishop, 2, 7, 3};
+    Piece wb2 = {true, bishop, 5, 7, 3};
 
-    Piece wq = {true, queen, 5, 4};
-    Piece wk = {true, king, 4, 7};
+    Piece wq = {true, queen, 3, 7, 9};
+    Piece wk = {true, king, 4, 7, 100};
 
 
-    Piece bp1 = {false, pawn, 0, 1};
-    Piece bp2 = {false, pawn, 1, 1};
-    Piece bp3 = {false, pawn, 2, 4};
-    Piece bp4 = {false, pawn, 3, 1};
-    Piece bp5 = {false, pawn, 4, 1};
-    Piece bp6 = {false, pawn, 5, 1};
-    Piece bp7 = {false, pawn, 1, 1};
-    Piece bp8 = {false, pawn, 7, 1};
+    Piece bp1 = {false, pawn, 0, 1, 1};
+    Piece bp2 = {false, pawn, 1, 1, 1};
+    Piece bp3 = {false, pawn, 2, 1, 1};
+    Piece bp4 = {false, pawn, 3, 1, 1};
+    Piece bp5 = {false, pawn, 4, 1, 1};
+    Piece bp6 = {false, pawn, 5, 1, 1};
+    Piece bp7 = {false, pawn, 6, 1, 1};
+    Piece bp8 = {false, pawn, 7, 1, 1};
 
-    Piece br1 = {false, rook, 0, 0};
-    Piece br2 = {false, rook, 7, 0};
+    Piece br1 = {false, rook, 0, 0, 5};
+    Piece br2 = {false, rook, 7, 0, 5};
 
-    Piece bn1 = {false, knight, 1, 0};
-    Piece bn2 = {false, knight, 6, 0};
+    Piece bn1 = {false, knight, 1, 0, 3};
+    Piece bn2 = {false, knight, 6, 0, 3};
 
-    Piece bb1 = {false, bishop, 2, 0};
-    Piece bb2 = {false, bishop, 5, 0};
+    Piece bb1 = {false, bishop, 2, 0, 3};
+    Piece bb2 = {false, bishop, 5, 0, 3};
 
-    Piece bq = {false, queen, 3, 0};
-    Piece bk = {false, king, 4, 0};
+    Piece bq = {false, queen, 3, 0, 9};
+    Piece bk = {false, king, 4, 0, 100};
     
     currPieces[0] = wp1;
     currPieces[1] = wp2;

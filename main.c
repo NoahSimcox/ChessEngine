@@ -9,14 +9,14 @@ int main() {
     Piece currPieces[32];
     Piece* Board = new_board(currPieces);
 
-    Piece currMove[2] = {{true, queen, 5, 4}, {true, queen, 2, 4}};
+    Piece currMove[2] = {{true, pawn, 4, 6}, {true, pawn, 4, 4}};
 
     Piece newPawnMove[1];
     bool EnPassant = canEnPassant(currMove, currPieces, newPawnMove);
 
     Piece* newBoard = update_board(currMove, Board, currPieces);
 
-    Piece piece = {false, knight, 2, 5 };
+    Piece piece = {true, pawn, 4, 4 };
     Piece (*ptr)[COL] = possible_moves(piece);
     Piece* newMoves = possible_moves_prune(ptr, currPieces, EnPassant, newPawnMove);
 
@@ -40,6 +40,6 @@ int main() {
     }
 
     for (int j = 0; j < 32; j++) {
-        printf("value: %d color: %d position: [%d, %d]\n", (currPieces + j) -> type, (currPieces + j) -> isWhite, (currPieces + j) -> x, (currPieces + j) -> y);
+        printf("type: %d color: %d position: [%d, %d] value: %f\n", (currPieces + j) -> type, (currPieces + j) -> isWhite, (currPieces + j) -> x, (currPieces + j) -> y, (currPieces + j) -> value);
     }
 }
