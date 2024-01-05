@@ -9,14 +9,16 @@ int main() {
     Piece currPieces[32];
     Piece* Board = new_board(currPieces);
 
-    Piece currMove[2] = {{true, pawn, 4, 6}, {true, pawn, 4, 4}};
+    Piece currMove[2] = {{true, pawn, 5, 6}, {true, pawn, 4, 4}};
 
     Piece newPawnMove[1];
     bool EnPassant = canEnPassant(currMove, currPieces, newPawnMove);
 
     Piece* newBoard = update_board(currMove, Board, currPieces);
 
-    Piece piece = {true, pawn, 4, 4 };
+
+
+    Piece piece = {false, king, 4, 4 };
     Piece (*ptr)[COL] = possible_moves(piece);
     Piece* newMoves = possible_moves_prune(ptr, currPieces, EnPassant, newPawnMove);
 

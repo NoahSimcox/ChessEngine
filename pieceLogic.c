@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "stdbool.h"
 
-Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1]){
+Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1], bool inCheck){
 
 
     static Piece newPossibleMoves[27];
@@ -113,3 +113,5 @@ bool canEnPassant(Piece currMove[2], Piece currPieces[32], Piece newMove[1]){
     }
     return false;
 }
+
+bool check()

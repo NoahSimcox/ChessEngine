@@ -58,7 +58,7 @@ Piece* new_board(Piece currPieces[32]){
     Piece bb2 = {false, bishop, 5, 0, 3};
 
     Piece bq = {false, queen, 3, 0, 9};
-    Piece bk = {false, king, 4, 0, 100};
+    Piece bk = {false, king, 4, 4, 100};
     
     currPieces[0] = wp1;
     currPieces[1] = wp2;
@@ -134,7 +134,9 @@ Piece* update_board(Piece move[2], Piece currBoard[64], Piece currPieces[32]) {
 
         if (i < 32 && currPieces[i].x == move[1].x && currPieces[i].y == move[1].y){
             currPieces[i].type = empty;
+            currPieces[i].value = 0.0f;
             currBoard[i].type = empty;
+            currBoard[i].value = 0.0f;
         }
 
         if (i < 32 && currPieces[i].x == move[0].x && currPieces[i].y == move[0].y) {

@@ -13,3 +13,15 @@
 57	128	7261170150649388	untitled.exe	f0b6a349228f94c5
 2	57	7261171478220212	CMakeFiles/untitled.dir/main.c.obj	7e4358bc261d7893
 58	131	7261171478930371	untitled.exe	f0b6a349228f94c5
+10	73	7261193983619010	CMakeFiles/untitled.dir/evaluate.c.obj	4b10f4edef36a7fe
+6	77	7261193983659018	CMakeFiles/untitled.dir/chessBoard.c.obj	46add26f44e433e3
+2	85	7261193983739032	CMakeFiles/untitled.dir/main.c.obj	7e4358bc261d7893
+85	264	7261193985509434	untitled.exe	f0b6a349228f94c5
+2	56	7261194619454039	CMakeFiles/untitled.dir/chessBoard.c.obj	46add26f44e433e3
+56	128	7261194620154192	untitled.exe	f0b6a349228f94c5
+6	63	7261198920371064	CMakeFiles/untitled.dir/chessBoard.c.obj	46add26f44e433e3
+2	64	7261198920391071	CMakeFiles/untitled.dir/main.c.obj	7e4358bc261d7893
+10	76	7261198920511102	CMakeFiles/untitled.dir/pieceLogic.c.obj	26be98051ccd3756
+76	150	7261198921221252	untitled.exe	f0b6a349228f94c5
+2	59	7261201948789247	CMakeFiles/untitled.dir/chessBoard.c.obj	46add26f44e433e3
+59	133	7261201949499409	untitled.exe	f0b6a349228f94c5
