@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "stdbool.h"
 
-Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1], bool inCheck){
+Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1]/*, bool inCheck*/){
 
 
     static Piece newPossibleMoves[27];
@@ -114,4 +114,20 @@ bool canEnPassant(Piece currMove[2], Piece currPieces[32], Piece newMove[1]){
     return false;
 }
 
-bool check()
+bool check(Piece currPieces[32], Piece currMove[2]){
+
+    float totalPoints = 0.0f;
+
+    for (int i = 0; i < 32; i++){
+
+//        if ()
+
+        if (currPieces[i].isWhite != currMove[i].isWhite)
+            totalPoints += currPieces[i].value;
+    }
+
+    if (totalPoints < 90.0f)
+        return true;
+
+    return false;
+}

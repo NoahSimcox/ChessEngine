@@ -9,7 +9,7 @@ int main() {
     Piece currPieces[32];
     Piece* Board = new_board(currPieces);
 
-    Piece currMove[2] = {{true, pawn, 5, 6}, {true, pawn, 4, 4}};
+    Piece currMove[2] = {{true, pawn, 5, 6}, {true, pawn, 5, 5}};
 
     Piece newPawnMove[1];
     bool EnPassant = canEnPassant(currMove, currPieces, newPawnMove);

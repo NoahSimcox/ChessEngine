@@ -275,7 +275,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y++;
 
             if (temp.x <= 7 && temp.y <= 7)
-                moves[0][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -283,7 +286,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y--;
 
             if (temp.x <= 7 && temp.y >= 0)
-                moves[1][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -291,7 +297,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y -= 2;
 
             if (temp.x <= 7 && temp.y >= 0)
-                moves[2][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -299,7 +308,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y -= 2;
 
             if (temp.x >= 0 && temp.y >= 0)
-                moves[3][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -307,7 +319,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y++;
 
             if (temp.x >= 0 && temp.y <= 7)
-                moves[4][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -315,7 +330,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y--;
 
             if (temp.x >= 0 && temp.y >= 0)
-                moves[5][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -323,7 +341,10 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y += 2;
 
             if (temp.x >= 0 && temp.y <= 7)
-                moves[6][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -331,56 +352,77 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.y += 2;
 
             if (temp.x <= 7 && temp.y <= 7)
-                moves[7][0] = temp;
+                moves[rowChecker][0] = temp;
 
             break;
 
         case king:
             temp.x++;
             if (temp.x <= 7)
-                moves[0][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
 
             temp.x++;
             temp.y--;
             if (temp.x <= 7 && temp.y >= 0)
-                moves[1][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
 
             temp.y--;
             if (temp.y >= 0)
-                moves[2][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.y = p.y;
 
             temp.x--;
             temp.y--;
             if (temp.x >= 0 && temp.y >= 0)
-                moves[3][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
 
             temp.x--;
             if (temp.x >= 0)
-                moves[4][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
 
             temp.x--;
             temp.y++;
             if (temp.x >= 0 && temp.y <= 7)
-                moves[5][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
 
             temp.y++;
             if (temp.y <= 7)
-                moves[6][0] = temp;
+                moves[rowChecker][0] = temp;
+
+            if (moves[rowChecker][0].type != empty)
+                rowChecker++;
 
             temp.x = p.x;
             temp.y = p.y;
@@ -388,7 +430,7 @@ Piece (*possible_moves(Piece p))[COL] { // given the board is empty
             temp.x++;
             temp.y++;
             if (temp.x <= 7 && temp.y <= 7)
-                moves[7][0] = temp;
+                moves[rowChecker][0] = temp;
 
             break;
 
