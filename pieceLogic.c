@@ -3,14 +3,11 @@
 #include "chessBoard.h"
 #include "stdio.h"
 #include "stdbool.h"
+#include "arrayClean.h"
 
-Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1]/*, bool inCheck*/){
-
+Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bool canEnPassant, Piece newPawnMove[1]){
 
     static Piece newPossibleMoves[27];
-
-    if (possibleMoves[0][0].type == empty)
-        return newPossibleMoves;
 
     int row = 0;
     int col = 0;
@@ -21,9 +18,7 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bo
             if (col == 0 && possibleMoves[0][0].type != pawn && possibleMoves[row][col].type == empty)
                 return newPossibleMoves;
 
-            if (possibleMoves[0][0].type == pawn && possibleMoves[row][col].type == empty)
-                return newPossibleMoves;
-            else if (possibleMoves[row][col].type == empty){
+            else if (possibleMoves[row][col].type == empty && possibleMoves[0][0].type != pawn){
                 row++;
                 col = 0;
                 break;
@@ -63,6 +58,10 @@ Piece* possible_moves_prune(Piece(*possibleMoves)[COL], Piece currPieces[32], bo
         }
 
         if (possibleMoves[0][0].type != knight && possibleMoves[0][0].type != king) {
+
+            if (possibleMoves[row][col].type == empty)
+                goto exitLoop;
+
             newPossibleMoves[i] = possibleMoves[row][col];
 
             if (col == 6) {
@@ -114,20 +113,72 @@ bool canEnPassant(Piece currMove[2], Piece currPieces[32], Piece newMove[1]){
     return false;
 }
 
-bool check(Piece currPieces[32], Piece currMove[2]){
+bool check(Piece currPieces[32], Piece currMove[2], bool EnPassant, Piece newPawnMove[1], Piece* Board){
 
-    float totalPoints = 0.0f;
+    bool inCheck = false;
+    int futureArrSize = 0;
+    Piece tempPieces[32];
 
     for (int i = 0; i < 32; i++){
 
-//        if ()
-
-        if (currPieces[i].isWhite != currMove[i].isWhite)
-            totalPoints += currPieces[i].value;
+        tempPieces[i] = currPieces[i];
+        printf("type: %d color: %d position: [%d, %d] value: %f\n", (tempPieces + i) -> type, (tempPieces + i) -> isWhite, (tempPieces + i) -> x, (tempPieces + i) -> y, (tempPieces + i) -> value);
     }
 
-    if (totalPoints < 90.0f)
-        return true;
 
-    return false;
+    int increment = 0;
+    if (!(currMove[0].isWhite))
+        increment = 16;
+
+
+    for (int k = 0; k < 16; k++){
+
+        if (tempPieces[k + increment].type == empty)
+            continue;
+
+        Piece piece = {tempPieces[k + increment].isWhite, tempPieces[k + increment].type, tempPieces[k + increment].x, tempPieces[k + increment].y};
+        Piece (*ptr)[COL] = possible_moves(piece);
+        printf("!!x: %d  Y: %d\n", tempPieces[k + increment].x, tempPieces[k + increment].y);
+        Piece *futureMoves = possible_moves_prune(ptr, tempPieces, EnPassant, newPawnMove);
+        Piece *futureArr = arrayClean(futureMoves, &futureArrSize);
+
+        if (futureArr[0].type == empty)
+            continue;
+
+        printf("size: %d\ninitial position  x: %d  y: %d\n", futureArrSize, tempPieces[k + increment].x, tempPieces[k + increment].y);
+        for (int h = 0; h < futureArrSize; h++) {
+
+            printf("x: %d  Y: %d\n", futureArr[h].x, futureArr[h].y);
+        }
+
+
+        for (int j = 0; j < futureArrSize; j++) {
+
+            Piece futureMove[2] = {{futureArr[j].isWhite, futureArr[j].type, tempPieces[k + increment].x, tempPieces[k + increment].y},
+                                   {futureArr[j].isWhite, futureArr[j].type, futureArr[j].x, futureArr[j].y}};
+
+            Piece *futureBoard = update_board(futureMove, Board, tempPieces);
+
+            float totalPoints = 0.0f;
+
+            if (currMove[0].isWhite) {
+                for (int l = 0; l < 16; l++) {
+                    totalPoints += tempPieces[l].value;
+                }
+            }
+            else {
+                for (int m = 0; m < 16; m++) {
+                    totalPoints += tempPieces[m + 16].value;
+                }
+            }
+
+            if (totalPoints < 90.0f) {
+                printf("balls\n");
+                inCheck = true;
+                printf("x: %d  y: %d \n", futureArr[j].x, futureArr[j].y);
+            }
+        }
+    }
+
+    return inCheck;
 }

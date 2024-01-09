@@ -39,8 +39,8 @@ Piece* new_board(Piece currPieces[32]){
     Piece wk = {true, king, 4, 7, 100};
 
 
-    Piece bp1 = {false, pawn, 0, 1, 1};
-    Piece bp2 = {false, pawn, 1, 1, 1};
+    Piece bp1 = {false, pawn, 0, 5, 1};
+    Piece bp2 = {false, pawn, 1, 5, 1};
     Piece bp3 = {false, pawn, 2, 1, 1};
     Piece bp4 = {false, pawn, 3, 1, 1};
     Piece bp5 = {false, pawn, 4, 1, 1};
@@ -57,7 +57,7 @@ Piece* new_board(Piece currPieces[32]){
     Piece bb1 = {false, bishop, 2, 0, 3};
     Piece bb2 = {false, bishop, 5, 0, 3};
 
-    Piece bq = {false, queen, 5, 5, 9};
+    Piece bq = {false, queen, 3, 0, 9};
     Piece bk = {false, king, 4, 4, 100};
     
     currPieces[0] = wp1;
